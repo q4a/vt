@@ -10,7 +10,7 @@ function createDummyProject (packageConfig)
 
 	language "C++"
 
-	premake.buildconfigs()
+--	premake.buildconfigs()
 
 	-- 	External Virtools Directories ? If not, the variables from ModuleConfig.lua will be used !
 	--		This assumes that the virtools headers and libs are in inside the module path : Dependencies\vt\...
@@ -26,7 +26,9 @@ end
 --	Modifies an project according to a supplied package config
 function evaluateConfigs(prj,packageConfig)
 
-	for cfg in premake.eachconfig(prj) do
+--	for cfg in premake.eachconfig(prj) do
+	local prjConf = {{name="Debug"},{name="Release"},{name="ReleaseDebug"},{name="ReleaseRedist"},{name="ReleaseDemo"}}
+	for index, cfg in ipairs(prjConf) do
 
 	configuration(cfg.name)
 
