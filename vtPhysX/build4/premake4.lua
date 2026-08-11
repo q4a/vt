@@ -97,9 +97,9 @@ packageConfig_vtAgeiaLib =
 	TargetSuffix = "",
 	Defines 	= { DEF_STD_DIRECTIVES 	; 	DEF_PHYSX_DIRECTIVES ; "NX_USE_SDK_STATICLIBS" ; "NXCHARACTER_EXPORTS" ; "VIRTOOLS_USER_SDK" ; "MODULE_BASE_EXPORTS" ; },
 	Files		= { DROOT.."SDK/src/core/**.cpp"	;	DROOT.."SDK/include/core/**.h"  ; F_BASE_STD_INC ;F_VT_STD_INC; F_BASE_VT_SRC ;F_BASE_SRC;F_SHARED_SRC },
-	Includes  	= { D_PHYSX_INCLUDES ; D_STD_INCLUDES ; D_VT_BASE_INC; D_CORE_INCLUDES ; DDEPS.."TinyXML" },
+	Includes  	= { D_PHYSX_INCLUDES ; D_STD_INCLUDES ; D_VT_BASE_INC; D_CORE_INCLUDES ; DDEPS.."TinyXML" ; DDEPS.."Virtools.SDK/Include" },
 	Libs	= {	"TinyXML" , "NxCharacter" , "NxCommon" , "NxuStream2"; "ck2" ; "vxmath"  ; "user32" ;  "kernel32" ; "PhysXLoader" ; "Winmm"  },
-	LibDirectories = { D_PHYSX.."SDKs/lib/Win32" },
+	LibDirectories = { D_PHYSX.."SDKs/lib/Win32" ; DDEPS.."Virtools.SDK/Lib" },
 	Options = { "/W0"},
 	PostCommand = "copy $(TargetDir)$(TargetFileName) "..getVTDirectory():lower().."\n".."copy $(TargetDir)$(InputName).pdb "..getVTDirectory():lower()
 }
@@ -112,9 +112,9 @@ packageConfig_vtAgeiaBeh =
 	TargetSuffix = "/BuildingBlocks",
 	Defines 	= { DEF_STD_DIRECTIVES 	; 	DEF_PHYSX_DIRECTIVES ; "NX_USE_SDK_STATICLIBS" ; "NXCHARACTER_EXPORTS" ; "VIRTOOLS_USER_SDK" ; "MODULE_BASE_EXPORTS" },
 	Files		= { DROOT.."SDK/src/Behaviors/**.cpp"	; DROOT.."SDK/src/Behaviors/*.def" ; D_DOCS_PAGES.."*.page" ; F_SHARED_SRC ; DROOT.."build4/**.lua" ; F_EXTRA_BB_SRC ; F_BASE_SRC },
-	Includes  	= { D_PHYSX_INCLUDES ; D_STD_INCLUDES ; D_CORE_INCLUDES ; DDEPS.."TinyXML" ; DDEPS.."dx/Include" },
+	Includes  	= { D_PHYSX_INCLUDES ; D_STD_INCLUDES ; D_CORE_INCLUDES ; DDEPS.."TinyXML" ; DDEPS.."Virtools.SDK/Include" ; DDEPS.."dx/Include" },
 	Libs	= {	"ck2" ; "vxmath"  ; "user32" ;  "kernel32" ; "vtPhysXLib" ;"Winmm" ; "dxerr"; "dinput8";"dxguid" },
-	LibDirectories = { D_PHYSX.."SDKs/lib/Win32" ; D_DX.."lib" },
+	LibDirectories = { D_PHYSX.."SDKs/lib/Win32" ; DDEPS.."Virtools.SDK/Lib" ; D_DX.."lib" },
 	Options = { "/W0"},
 	PostCommand = "copy $(TargetDir)$(TargetFileName) "..getVTDirectory():lower().."\\BuildingBlocks" .."\n".."copy $(TargetDir)$(InputName).pdb "..getVTDirectory():lower().."\\BuildingBlocks"
 
@@ -130,9 +130,9 @@ packageConfig_vtAgeiaReader =
 	TargetSuffix = "/Plugins",
 	Defines 	= { DEF_STD_DIRECTIVES 	; 	DEF_PHYSX_DIRECTIVES ; "NX_USE_SDK_STATICLIBS" ; "NXCHARACTER_EXPORTS" ; "VIRTOOLS_USER_SDK" ; "MODULE_BASE_EXPORTS" },
 	Files		= { D_READER_SRC.."*.cpp" ; D_READER_SRC.."*.def" ;  },
-	Includes  	= { D_PHYSX_INCLUDES ; D_STD_INCLUDES ; D_CORE_INCLUDES ; DDEPS.."TinyXML" },
+	Includes  	= { D_PHYSX_INCLUDES ; D_STD_INCLUDES ; D_CORE_INCLUDES ; DDEPS.."TinyXML" ; DDEPS.."Virtools.SDK/Include" },
 	Libs	= {	"ck2" ; "vxmath"  ; "user32" ;  "kernel32" ; "vtPhysXLib"	},
-	LibDirectories = { D_PHYSX.."SDKs/lib/Win32" },
+	LibDirectories = { D_PHYSX.."SDKs/lib/Win32" ; DDEPS.."Virtools.SDK/Lib" },
 	Options = { "/W0"},
 	PostCommand = "copy $(TargetDir)$(TargetFileName) "..getVTDirectory():lower().."\\BuildingBlocks" .."\n".."copy $(TargetDir)$(InputName).pdb "..getVTDirectory():lower().."\\Plugins"
 }
@@ -147,9 +147,9 @@ packageConfig_vtAgeiaInterface =
 	TargetSuffix = "/InterfacePlugins",
 	Defines 	= { DEF_STD_DIRECTIVES 	; 	DEF_PHYSX_DIRECTIVES ; "NX_USE_SDK_STATICLIBS" ; "NXCHARACTER_EXPORTS" ; "VIRTOOLS_USER_SDK" ; "MODULE_BASE_EXPORTS" },
 	Files		= { D_UI_SRC.."*.cpp" ; D_UI_SRC.."*.def" ; D_INCLUDE.."Interface/*.h" },
-	Includes  	= { D_PHYSX_INCLUDES ; D_STD_INCLUDES ; D_CORE_INCLUDES ; DDEPS.."TinyXML" ; D_INCLUDE.."Interface" },
+	Includes  	= { D_PHYSX_INCLUDES ; D_STD_INCLUDES ; D_CORE_INCLUDES ; DDEPS.."TinyXML" ; DDEPS.."Virtools.SDK/Include" ; D_INCLUDE.."Interface" },
 	Libs	= {	"ck2" ; "vxmath"  ; "user32" ;  "kernel32" ; "vtPhysXLib" ; "DllEditor" ; "InterfaceControls" ;  "CKControls" ; "CK2Ui"	},
-	LibDirectories = { D_PHYSX.."SDKs/lib/Win32" },
+	LibDirectories = { D_PHYSX.."SDKs/lib/Win32" ; DDEPS.."Virtools.SDK/Lib" },
 	Options = { "/W0"},
 	PostCommand = "copy $(TargetDir)$(TargetFileName) "..getVTDirectory():lower().."\\InterfacePlugins" .."\n".."copy $(TargetDir)$(InputName).pdb "..getVTDirectory():lower().."\\InterfacePlugins"
 }

@@ -445,7 +445,7 @@ void PhysicManager::_RegisterVSLCommon()
 	DECLAREMEMBER(pAxisReferencedLength,CKBeObject*,reference)
 	DECLAREMEMBER(pAxisReferencedLength,int,referenceAxis)
 	DECLAREMETHOD_0(pAxisReferencedLength,bool,isValid)
-	DECLAREMETHOD_0(pAxisReferencedLength,void,setToDefault)
+	DECLAREMETHOD_0(pAxisReferencedLength,bool,setToDefault)
 
 	DECLAREOBJECTTYPE(pWheelDescr)
 	DECLARECTOR_0(__newpWheelDescr)
@@ -463,7 +463,7 @@ void PhysicManager::_RegisterVSLCommon()
 	DECLAREMEMBER(pWheelDescr,pTireFunction,latFunc)
 	DECLAREMEMBER(pWheelDescr,pTireFunction,longFunc)
 	DECLAREMETHOD_0(pWheelDescr,void,setToDefault)
-	DECLAREMETHOD_0(pWheelDescr,bool,isValid)
+	DECLAREMETHODC_0(pWheelDescr,bool,isValid)
 
 
 
@@ -488,7 +488,7 @@ void PhysicManager::_RegisterVSLCommon()
 	DECLAREMEMBER(pConvexCylinderSettings,bool,buildLowerHalfOnly)
 	DECLAREMEMBER(pConvexCylinderSettings,pConvexFlags,convexFlags)
 	DECLAREMETHOD_0(pConvexCylinderSettings,bool,isValid)
-	DECLAREMETHOD_0(pConvexCylinderSettings,void,setToDefault)
+	DECLAREMETHOD_0(pConvexCylinderSettings,bool,setToDefault)
 
 	DECLAREOBJECTTYPE(pCapsuleSettingsEx)
 	DECLARECTOR_0(__newpCapsuleSettingsEx)
@@ -576,8 +576,8 @@ void PhysicManager::_RegisterVSLCommon()
 		DECLAREMETHOD_1(pObjectDescr,void,setMass,pMassSettings)
 	
 	DECLAREMEMBER(pObjectDescr,pCCDSettings,ccd)
-		DECLAREMETHOD_0(pObjectDescr,pCCDSettings&,getCollision)
-		DECLAREMETHOD_1(pObjectDescr,void,setCollision,pCCDSettings)
+		DECLAREMETHOD_0(pObjectDescr,pCollisionSettings&,getCollision)
+		DECLAREMETHOD_1(pObjectDescr,void,setCollision,pCollisionSettings)
 
 	DECLAREMEMBER(pObjectDescr,pOptimization,optimization)
 		DECLAREMETHOD_0(pObjectDescr,pOptimization&,getOptimization)

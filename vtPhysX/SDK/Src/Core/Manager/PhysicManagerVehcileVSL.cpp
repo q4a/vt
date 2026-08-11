@@ -41,7 +41,7 @@ void PhysicManager::_RegisterVSLVehicle()
 	DECLAREMEMBER(pVehicleGearDesc,int,nbForwardGears)
 	DECLAREMETHOD_0(pVehicleGearDesc,void,setToDefault)
 	DECLAREMETHOD_0(pVehicleGearDesc,void,setToCorvette)
-	DECLAREMETHOD_0(pVehicleGearDesc,bool,isValid)
+	DECLAREMETHODC_0(pVehicleGearDesc,bool,isValid)
 
 
 	DECLAREOBJECTTYPE(pVehicleDesc)
@@ -73,12 +73,12 @@ void PhysicManager::_RegisterVSLVehicle()
 
 	DECLAREMETHOD_1(pVehicle,int,initEngine,int)
 	
-	DECLAREMETHOD_0(pVehicle,BOOL,isValidEngine)
+	DECLAREMETHOD_0(pVehicle,bool,isValidEngine)
 
 	DECLAREMETHOD_0(pVehicle,pEngine*,getEngine)
 	DECLAREMETHOD_0(pVehicle,pGearBox*,getGearBox)
 
-	DECLAREMETHOD_0(pVehicle,int,getStateFlags)
+	DECLAREMETHOD_0(pVehicle,int&,getStateFlags)
 	
 	DECLAREMETHOD_1(pVehicle,void,setClutch,float)
 	DECLAREMETHOD_0(pVehicle,float,getClutch)
@@ -97,7 +97,7 @@ void PhysicManager::_RegisterVSLVehicle()
 
 
 	DECLAREMETHOD_1(pEngine,void,setForceFeedbackScale,float)
-	DECLAREMETHOD_0(pEngine,float,getForceFeedbackScale)
+	DECLAREMETHODC_0(pEngine,float,getForceFeedbackScale)
 
 	//----------------------------------------------------------------
 	//
@@ -105,7 +105,7 @@ void PhysicManager::_RegisterVSLVehicle()
 	//
 	DECLAREMETHOD_0(pVehicle,pEngine*,getEngine)
 
-	DECLAREMETHOD_0(pEngine,pLinearInterpolation,getTorqueCurve)
+	DECLAREMETHOD_0(pEngine,pLinearInterpolation*,getTorqueCurve)
 	DECLAREMETHOD_1(pEngine,void,setTorqueCurve,pLinearInterpolation)
 
 	DECLAREMETHOD_0(pEngine,float,getRPM)
@@ -118,15 +118,15 @@ void PhysicManager::_RegisterVSLVehicle()
 	DECLAREMETHOD_1(pEngine,void,setIdleRPM,float)
 
 	DECLAREMETHOD_1(pEngine,void,setBrakingCoeff,float)
-	DECLAREMETHOD_0(pEngine,float,getBrakingCoeff)
+	DECLAREMETHODC_0(pEngine,float,getBrakingCoeff)
 
 	DECLAREMETHOD_1(pEngine,void,setFriction,float)
-	DECLAREMETHOD_0(pEngine,float,getFriction)
+	DECLAREMETHODC_0(pEngine,float,getFriction)
 
 	DECLAREMETHOD_1(pEngine,void,SetInertia,float)
 
 	DECLAREMETHOD_1(pEngine,void,setStartRPM,float)
-	DECLAREMETHOD_0(pEngine,float,getStartRPM)
+	DECLAREMETHODC_0(pEngine,float,getStartRPM)
 
 	DECLAREMETHOD_0(pEngine,int,GetGears)
 	DECLAREMETHOD_0(pVehicle,void,PreCalcDriveLine)
@@ -138,10 +138,10 @@ void PhysicManager::_RegisterVSLVehicle()
 	//
 	// interpolation curve, used for for torque and gears
 	//
-	DECLAREMETHOD_0(pLinearInterpolation,int,getSize)
-	DECLAREMETHOD_1(pLinearInterpolation,int,isValid,float)
-	DECLAREMETHOD_1(pLinearInterpolation,float,getValue,float)
-	DECLAREMETHOD_1(pLinearInterpolation,int,getValueAtIndex,int)
+	DECLAREMETHODC_0(pLinearInterpolation,int,getSize)
+	DECLAREMETHODC_1(pLinearInterpolation,bool,isValid,float)
+	DECLAREMETHODC_1(pLinearInterpolation,float,getValue,float)
+	DECLAREMETHODC_1(pLinearInterpolation,int,getValueAtIndex,int)
 	DECLAREMETHOD_2(pLinearInterpolation,void,insert,float,float)
 
 
@@ -152,10 +152,10 @@ void PhysicManager::_RegisterVSLVehicle()
 
 	DECLAREMETHOD_1(pGearBox,float,GetTorqueForWheel,pWheel2*)
 
-	DECLAREMETHOD_0(pGearBox,pLinearInterpolation,getGearRatios)
+	DECLAREMETHOD_0(pGearBox,pLinearInterpolation&,getGearRatios)
 	DECLAREMETHOD_1(pGearBox,void,setGearRatios,pLinearInterpolation)
 
-	DECLAREMETHOD_0(pGearBox,pLinearInterpolation,getGearTensors)
+	DECLAREMETHOD_0(pGearBox,pLinearInterpolation&,getGearTensors)
 	DECLAREMETHOD_1(pGearBox,void,setGearTensors,pLinearInterpolation)
 
 
@@ -173,7 +173,7 @@ void PhysicManager::_RegisterVSLVehicle()
 	
 	DECLAREMETHOD_0(pWheel2,float,getWheelTorque)
 	DECLAREMETHOD_0(pWheel2,float,getWheelBreakTorque)
-	DECLAREMETHOD_0(pWheel2,float,getAxleSpeed)
+	DECLAREMETHODC_0(pWheel2,float,getAxleSpeed)
 	
 	DECLAREMETHOD_0(pWheel2,VxVector,GetForceRoadTC)
 	DECLAREMETHOD_0(pWheel2,VxVector,GetForceBodyCC)
@@ -187,7 +187,7 @@ void PhysicManager::_RegisterVSLVehicle()
 	DECLAREMETHOD_0(pWheel2,float,GetHeading)
 	DECLAREMETHOD_0(pWheel2,float,GetRotation)
 	DECLAREMETHOD_0(pWheel2,float,GetRotationV)
-	DECLAREMETHOD_0(pWheel2,float,GetAcceleration)
+	DECLAREMETHOD_0(pWheel2,VxVector,GetAcceleration)
 
 	DECLAREMETHOD_0(pWheel2,VxVector,GetVelocity)
 	//DECLAREMETHOD_0(pWheel2,VxVector,GetAcceleration)
@@ -226,7 +226,7 @@ void PhysicManager::_RegisterVSLVehicle()
 	DECLAREMETHOD_1(pWheel2,void,setMass,float)
 	DECLAREMETHOD_1(pWheel2,void,setTireRate,float)
 	
-	DECLAREMETHOD_0(pWheel2,float,getCsSlipLen)
+	DECLAREMETHODC_0(pWheel2,float,getCsSlipLen)
 	DECLAREMETHOD_1(pWheel2,void,setRollingCoeff,float)
 
 	
@@ -234,7 +234,7 @@ void PhysicManager::_RegisterVSLVehicle()
 
 	
 
-	DECLAREMETHOD_0(pWheel2,float,getSuspensionTravel)
+	DECLAREMETHODC_0(pWheel2,float,getSuspensionTravel)
 
 	//----------------------------------------------------------------
 	//

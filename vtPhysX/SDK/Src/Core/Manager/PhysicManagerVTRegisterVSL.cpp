@@ -6,6 +6,29 @@
 
 
 #include "Bind.h"
+#define DECLAREMETHOD_9_WITH_DEF_VALS(classe,ret,method,arg1,defVal1,arg2,defVal2,arg3,defVal3,arg4,defVal4,arg5,defVal5,arg6,defVal6,arg7,defVal7,arg8,defVal8,arg9,defVal9) { \
+	typedef ret (classe::*fptr)(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9); \
+	fptr var = (fptr)(&classe::method); \
+	TPtrToRoutine ptr; \
+	ptr.CreateMethodPtr((void**) &var); \
+	VSLM->RegisterMethod(#classe,#method,FALSE,ptr,VCALLTYPE_STDCALL,9,#ret,#arg1" = "#defVal1,#arg2" = "#defVal2,#arg3" = "#defVal3,#arg4" = "#defVal4,#arg5" = "#defVal5,#arg6" = "#defVal6,#arg7" = "#defVal7,#arg8" = "#defVal8,#arg9" = "#defVal9);\
+}
+
+#define DECLAREMETHOD_10_WITH_DEF_VALS(classe,ret,method,arg1,defVal1,arg2,defVal2,arg3,defVal3,arg4,defVal4,arg5,defVal5,arg6,defVal6,arg7,defVal7,arg8,defVal8,arg9,defVal9,arg10,defVal10) { \
+	typedef ret (classe::*fptr)(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10); \
+	fptr var = (fptr)(&classe::method); \
+	TPtrToRoutine ptr; \
+	ptr.CreateMethodPtr((void**) &var); \
+	VSLM->RegisterMethod(#classe,#method,FALSE,ptr,VCALLTYPE_STDCALL,10,#ret,#arg1" = "#defVal1,#arg2" = "#defVal2,#arg3" = "#defVal3,#arg4" = "#defVal4,#arg5" = "#defVal5,#arg6" = "#defVal6,#arg7" = "#defVal7,#arg8" = "#defVal8,#arg9" = "#defVal9,#arg10" = "#defVal10);\
+}
+
+#define DECLAREMETHOD_11_WITH_DEF_VALS(classe,ret,method,arg1,defVal1,arg2,defVal2,arg3,defVal3,arg4,defVal4,arg5,defVal5,arg6,defVal6,arg7,defVal7,arg8,defVal8,arg9,defVal9,arg10,defVal10,arg11,defVal11) { \
+	typedef ret (classe::*fptr)(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11); \
+	fptr var = (fptr)(&classe::method); \
+	TPtrToRoutine ptr; \
+	ptr.CreateMethodPtr((void**) &var); \
+	VSLM->RegisterMethod(#classe,#method,FALSE,ptr,VCALLTYPE_STDCALL,11,#ret,#arg1" = "#defVal1,#arg2" = "#defVal2,#arg3" = "#defVal3,#arg4" = "#defVal4,#arg5" = "#defVal5,#arg6" = "#defVal6,#arg7" = "#defVal7,#arg8" = "#defVal8,#arg9" = "#defVal9,#arg10" = "#defVal10,#arg11" = "#defVal11);\
+}
 
 PhysicManager *ourMan = NULL;
 
@@ -356,7 +379,7 @@ void PhysicManager::_RegisterVSL()
 		//
 		DECLAREPOINTERTYPE(pSerializer)
 		DECLAREFUN_C_0(pSerializer*, GetSerializer)
-		DECLAREMETHOD_2(pSerializer,void,overrideBody,pRigidBody*,int)
+		DECLAREMETHOD_2(pSerializer,bool,overrideBody,pRigidBody*,int)
 		DECLAREMETHOD_2(pSerializer,int,loadCollection,const char*,int)
 		DECLAREMETHOD_1(pSerializer,int,saveCollection,const char*)
 		DECLAREMETHOD_2(pSerializer,void,parseFile,const char*,int)
@@ -435,10 +458,10 @@ void PhysicManager::_RegisterVSL()
 		//
 		//					JOINT CREATION
 		//
-		DECLAREMETHOD_11_WITH_DEF_VALS(pFactory,pJointDistance*,createDistanceJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,VxVector(),VxVector,VxVector(),float,0.0f,float,0.0f,pSpring,pSpring(),BOOL,"TRUE",float,"0.0",float,"0.0",const char *,"pJDistance")
-		DECLAREMETHOD_5(pFactory,pJointD6*,createD6Joint,CK3dEntity*,CK3dEntity*,VxVector,VxVector,bool)
+		DECLAREMETHOD_11_WITH_DEF_VALS(pFactory,pJointDistance*,createDistanceJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,VxVector(),VxVector,VxVector(),float,0.0f,float,0.0f,pSpring,pSpring(),bool,true,float,0.0f,float,0.0f,const char *,"pJDistance")
+		DECLAREMETHOD_7_WITH_DEF_VALS(pFactory,pJointD6*,createD6Joint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,VxVector(0,0,0),VxVector,VxVector(0,-1,0),bool,true,float,0.0f,float,0.0f)
 		
-		DECLAREMETHOD_5_WITH_DEF_VALS(pFactory,pJointFixed*,createFixedJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,float,"0.0",float,"0,0",const char*,"PJFixed")
+		DECLAREMETHOD_5_WITH_DEF_VALS(pFactory,pJointFixed*,createFixedJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,float,0.0f,float,0.0f,const char*,"PJFixed")
 
 		DECLAREMETHOD_3_WITH_DEF_VALS(pFactory,pRigidBody*,createBody,CK3dEntity*,NODEFAULT,pObjectDescr,NODEFAULT,CK3dEntity*,NULL)
 		
@@ -450,13 +473,13 @@ void PhysicManager::_RegisterVSL()
 		DECLAREMETHOD_2(pFactory,bool,loadFrom,pWheelDescr&,const char*)
 		DECLAREMETHOD_5(pFactory,pWheel*,createWheel,CK3dEntity *,CK3dEntity*,pWheelDescr,pConvexCylinderSettings,VxVector)
 
-		DECLAREMETHOD_9_WITH_DEF_VALS(pFactory,pJointPulley*,createPulleyJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,BOOL,"TRUE",float,"0.0",float,"0.0")
-		DECLAREMETHOD_9_WITH_DEF_VALS(pFactory,pJointBall*,createBallJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,VxVector,"0,0,1",bool,"TRUE",float,"0.0",float,"0.0",const char*,"pJBall")
-		DECLAREMETHOD_7_WITH_DEF_VALS(pFactory,pJointRevolute*,createRevoluteJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,bool,"TRUE",float,"0.0",float,"0.0",const char*,"pJRevolute")
-		DECLAREMETHOD_7_WITH_DEF_VALS(pFactory,pJointPrismatic*,createPrismaticJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,bool,TRUE,float,"0.0",float,"0.0",const char*,"pJPrismatic")
-		DECLAREMETHOD_7_WITH_DEF_VALS(pFactory,pJointCylindrical*,createCylindricalJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,bool,TRUE,float,"0.0",float,"0.0",,const char*,"pJCylindrical")
-		DECLAREMETHOD_7_WITH_DEF_VALS(pFactory,pJointPointInPlane*,createPointInPlaneJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,bool,TRUE,float,"0.0",float,"0.0",const char*,"pJPointInPlane")
-		DECLAREMETHOD_7_WITH_DEF_VALS(pFactory,pJointPointOnLine*,createPointOnLineJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,bool,TRUE,float,"0.0",float,"0.0",const char*,"pJPointOnLine")
+		DECLAREMETHOD_9_WITH_DEF_VALS(pFactory,pJointPulley*,createPulleyJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,bool,true,float,0.0f,float,0.0f)
+		DECLAREMETHOD_9_WITH_DEF_VALS(pFactory,pJointBall*,createBallJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,VxVector,VxVector(0,1,0),bool,true,float,0.0f,float,0.0f,const char*,"pJBall")
+		DECLAREMETHOD_8_WITH_DEF_VALS(pFactory,pJointRevolute*,createRevoluteJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,bool,true,float,0.0f,float,0.0f,const char*,"pJRevolute")
+		DECLAREMETHOD_8_WITH_DEF_VALS(pFactory,pJointPrismatic*,createPrismaticJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,bool,true,float,0.0f,float,0.0f,const char*,"pJPrismatic")
+		DECLAREMETHOD_8_WITH_DEF_VALS(pFactory,pJointCylindrical*,createCylindricalJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,bool,true,float,0.0f,float,0.0f,const char*,"pJCylindrical")
+		DECLAREMETHOD_8_WITH_DEF_VALS(pFactory,pJointPointInPlane*,createPointInPlaneJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,bool,true,float,0.0f,float,0.0f,const char*,"pJPointInPlane")
+		DECLAREMETHOD_8_WITH_DEF_VALS(pFactory,pJointPointOnLine*,createPointOnLineJoint,CK3dEntity*,NODEFAULT,CK3dEntity*,NODEFAULT,VxVector,NODEFAULT,VxVector,NODEFAULT,bool,true,float,0.0f,float,0.0f,const char*,"pJPointOnLine")
 
 		DECLAREMETHOD_2(pFactory,pCloth*,createCloth,CK3dEntity*,pClothDesc)
 
@@ -467,7 +490,7 @@ void PhysicManager::_RegisterVSL()
 		//					Cloth
 		//
 		DECLAREMETHOD_4(pCloth,void,attachToCore,CK3dEntity*,float,float,float)
-		DECLAREMETHOD_2(pCloth,void,attachToShape,CK3dEntity*,pClothAttachmentFlag)
+		DECLAREMETHOD_2(pCloth,void,attachToShape,CKBeObject*,int)
 
 
 		//////////////////////////////////////////////////////////////////////////
@@ -512,8 +535,8 @@ void PhysicManager::_RegisterVSL()
 
 
 		//
-		DECLAREMETHOD_5_WITH_DEF_VALS(pWorld,bool,raycastAnyBounds,const VxRay&,NODEFAULT,pShapesType,NODEFAULT,pGroupsMask,NODEFAULT,int,0xffffffff,float,NX_MAX_F32)
-		DECLAREMETHOD_8(pWorld,bool,overlapSphereShapes,CK3dEntity*,const VxSphere&,CK3dEntity*,pShapesType,CKGroup*,int,const pGroupsMask*,BOOL)
+		DECLAREMETHOD_5_WITH_DEF_VALS(pWorld,bool,raycastAnyBounds,const VxRay&,NODEFAULT,pShapesType,NODEFAULT,pGroupsMask*,NULL,int,0xffffffff,float,pFLOAT_MAX)
+		DECLAREMETHOD_7_WITH_DEF_VALS(pWorld,int,overlapSphereShapes,const VxSphere&,NODEFAULT,CK3dEntity*,NODEFAULT,pShapesType,NODEFAULT,CKGroup*,NODEFAULT,int,0xffffffff,const pGroupsMask*,NULL,bool,false)
 
 		//(const VxRay& worldRay, pShapesType shapesType, pGroupsMask groupsMask,unsigned int groups=0xffffffff, float maxDist=NX_MAX_F32);
 
@@ -535,10 +558,10 @@ void PhysicManager::_RegisterVSL()
 		DECLAREMETHOD_1(pJointRevolute,void,setGlobalAxis,const VxVector&)
 
 		
-		DECLAREMETHOD_1(pJointRevolute,void,setSpring,pSpring)
-		DECLAREMETHOD_1(pJointRevolute,void,setHighLimit,pJointLimit)
-		DECLAREMETHOD_1(pJointRevolute,void,setLowLimit,pJointLimit)
-		DECLAREMETHOD_1(pJointRevolute,void,setMotor,pMotor)
+		DECLAREMETHOD_1(pJointRevolute,bool,setSpring,pSpring)
+		DECLAREMETHOD_1(pJointRevolute,bool,setHighLimit,pJointLimit)
+		DECLAREMETHOD_1(pJointRevolute,bool,setLowLimit,pJointLimit)
+		DECLAREMETHOD_1(pJointRevolute,bool,setMotor,pMotor)
 
 		DECLAREMETHOD_0(pJointRevolute,pSpring,getSpring)
 		DECLAREMETHOD_0(pJointRevolute,pJointLimit,getLowLimit)
@@ -552,9 +575,9 @@ void PhysicManager::_RegisterVSL()
 		//
 		DECLAREMETHOD_0(pJoint,pJointBall*,castBall)
 
-		DECLAREMETHOD_1(pJointBall,void,setAnchor,VxVector)
+		DECLAREMETHOD_1(pJointBall,void,setAnchor,const VxVector&)
 		
-		DECLAREMETHOD_1(pJointBall,void,setSwingLimitAxis,VxVector)
+		DECLAREMETHOD_1(pJointBall,void,setSwingLimitAxis,const VxVector&)
 		DECLAREMETHOD_1(pJointBall,bool,setSwingLimit,pJointLimit)
 		DECLAREMETHOD_1(pJointBall,bool,setTwistHighLimit,pJointLimit)
 		DECLAREMETHOD_1(pJointBall,bool,setTwistLowLimit,pJointLimit)
@@ -566,7 +589,7 @@ void PhysicManager::_RegisterVSL()
 		
 		DECLAREMETHOD_1(pJointBall,bool,setSwingSpring,pSpring)
 		DECLAREMETHOD_1(pJointBall,bool,setTwistSpring,pSpring)
-		DECLAREMETHOD_1(pJointBall,void,setJointSpring,pSpring)
+		DECLAREMETHOD_1(pJointBall,bool,setJointSpring,pSpring)
 
 		DECLAREMETHOD_0(pJointBall,pSpring,getSwingSpring)
 		DECLAREMETHOD_0(pJointBall,pSpring,getTwistSpring)
@@ -582,7 +605,7 @@ void PhysicManager::_RegisterVSL()
 
 		DECLAREMETHOD_1(pJointPrismatic,void,setGlobalAnchor,VxVector)
 		DECLAREMETHOD_1(pJointPrismatic,void,setGlobalAxis,VxVector)
-		DECLAREMETHOD_1(pJointPrismatic,void,enableCollision,bool)
+		DECLAREMETHOD_1(pJointPrismatic,void,enableCollision,int)
 		//////////////////////////////////////////////////////////////////////////
 		//
 		//				JOINT Cylindrical
@@ -603,7 +626,7 @@ void PhysicManager::_RegisterVSL()
 
 		DECLAREMETHOD_1(pJointPointInPlane,void,setGlobalAnchor,VxVector)
 		DECLAREMETHOD_1(pJointPointInPlane,void,setGlobalAxis,VxVector)
-		DECLAREMETHOD_1(pJointPointInPlane,void,enableCollision,bool)
+		DECLAREMETHOD_1(pJointPointInPlane,void,enableCollision,int)
 
 		//////////////////////////////////////////////////////////////////////////
 		//
@@ -614,7 +637,7 @@ void PhysicManager::_RegisterVSL()
 
 		DECLAREMETHOD_1(pJointPointOnLine,void,setGlobalAnchor,VxVector)
 		DECLAREMETHOD_1(pJointPointOnLine,void,setGlobalAxis,VxVector)
-		DECLAREMETHOD_1(pJointPointOnLine,void,enableCollision,bool)
+		DECLAREMETHOD_1(pJointPointOnLine,void,enableCollision,int)
 
 		//////////////////////////////////////////////////////////////////////////
 		//
@@ -630,8 +653,8 @@ void PhysicManager::_RegisterVSL()
 		DECLAREMETHOD_0(pJoint,void,purgeLimitPlanes)
 		DECLAREMETHOD_0(pJoint,void,resetLimitPlaneIterator)
 		DECLAREMETHOD_0(pJoint,int,hasMoreLimitPlanes)
-		DECLAREMETHOD_3(pJoint,int,getNextLimitPlane,VxVector&,float&,float&)
-		DECLAREMETHOD_0(pJoint,int,getType)
+		DECLAREMETHOD_3_WITH_DEF_VALS(pJoint,int,getNextLimitPlane,VxVector&,NODEFAULT,float&,NODEFAULT,float*,NULL)
+		DECLAREMETHODC_0(pJoint,JType,getType)
 		//////////////////////////////////////////////////////////////////////////
 		//
 		//					JOINT :: DISTANCE
@@ -642,13 +665,13 @@ void PhysicManager::_RegisterVSL()
 		DECLAREMETHOD_1(pJointDistance,void,setMaxDistance,float)
 		DECLAREMETHOD_1(pJointDistance,void,setLocalAnchor0,VxVector)
 		DECLAREMETHOD_1(pJointDistance,void,setLocalAnchor1,VxVector)
-		DECLAREMETHOD_1(pJointDistance,void,setSpring,pSpring)
+		DECLAREMETHOD_1(pJointDistance,bool,setSpring,pSpring)
 		DECLAREMETHOD_0(pJointDistance,float,getMinDistance)
 		DECLAREMETHOD_0(pJointDistance,float,getMaxDistance)
-		DECLAREMETHOD_0(pJointDistance,float,getLocalAnchor0)
-		DECLAREMETHOD_0(pJointDistance,float,getLocalAnchor1)
+		DECLAREMETHOD_0(pJointDistance,VxVector,getLocalAnchor0)
+		DECLAREMETHOD_0(pJointDistance,VxVector,getLocalAnchor1)
 		DECLAREMETHOD_0(pJointDistance,pSpring,getSpring)
-		DECLAREMETHOD_1(pJointDistance,void,enableCollision,bool)
+		DECLAREMETHOD_1(pJointDistance,void,enableCollision,int)
 		//////////////////////////////////////////////////////////////////////////
 		//
 		//					JOINT PULLEY
@@ -662,7 +685,7 @@ void PhysicManager::_RegisterVSL()
 		DECLAREMETHOD_1(pJointPulley,void,setPulleyB,VxVector)
 		DECLAREMETHOD_1(pJointPulley,void,setStiffness,float)
 		DECLAREMETHOD_1(pJointPulley,void,setRatio,float)
-		DECLAREMETHOD_1(pJointPulley,void,setRigid,int)
+		DECLAREMETHOD_1(pJointPulley,void,setRigid,bool)
 		DECLAREMETHOD_1(pJointPulley,void,setDistance,float)
 		DECLAREMETHOD_1(pJointPulley,void,setMotor,pMotor)
 		DECLAREMETHOD_0(pJointPulley,VxVector,getLocalAnchorA)
@@ -771,14 +794,14 @@ void PhysicManager::_RegisterVSL()
 		/************************************************************************/
 		DECLAREMETHOD_1(pRigidBody,void,setAngularMomentum,const VxVector&)
 		DECLAREMETHOD_1(pRigidBody,void,setLinearMomentum,const VxVector&)
-		DECLAREMETHOD_0(pRigidBody,VxVector,getAngularMomentum)
-		DECLAREMETHOD_0(pRigidBody,VxVector,getLinearMomentum)
+		DECLAREMETHODC_0(pRigidBody,VxVector,getAngularMomentum)
+		DECLAREMETHODC_0(pRigidBody,VxVector,getLinearMomentum)
 		
 		/************************************************************************/
 		/* collision + callbacks													*/
 		/************************************************************************/
 		DECLAREMETHOD_1(pRigidBody,void,setContactReportThreshold,float)
-		DECLAREMETHOD_0(pRigidBody,float,setContactReportThreshold)
+		DECLAREMETHOD_0(pRigidBody,float,getContactReportThreshold)
 
 		DECLAREMETHOD_1(pRigidBody,void,setContactReportFlags,pContactPairFlags)
 		DECLAREMETHOD_0(pRigidBody,int,getContactReportFlags)
@@ -793,8 +816,8 @@ void PhysicManager::_RegisterVSL()
 		/************************************************************************/
 		/* Pose :                                                                     */
 		/************************************************************************/
-		DECLAREMETHOD_1(pRigidBody,void,setPosition,const VxVector&)
-		DECLAREMETHOD_1(pRigidBody,void,setRotation,const VxQuaternion&)
+		DECLAREMETHOD_2_WITH_DEF_VALS(pRigidBody,void,setPosition,const VxVector&,NODEFAULT,CK3dEntity*,NULL)
+		DECLAREMETHOD_2_WITH_DEF_VALS(pRigidBody,void,setRotation,const VxQuaternion&,NODEFAULT,CK3dEntity*,NULL)
 		DECLAREMETHOD_1(pRigidBody,void,translateLocalShapePosition,VxVector)
 
 		/************************************************************************/
@@ -803,9 +826,9 @@ void PhysicManager::_RegisterVSL()
 
 		DECLAREMETHOD_1(pRigidBody,void,setLinearVelocity,const VxVector&)
 		DECLAREMETHOD_1(pRigidBody,void,setAngularVelocity,const VxVector&)
-		DECLAREMETHOD_0(pRigidBody,float,getMaxAngularSpeed)
-		DECLAREMETHOD_0(pRigidBody,VxVector,getLinearVelocity)
-		DECLAREMETHOD_0(pRigidBody,VxVector,getAngularVelocity)
+		DECLAREMETHODC_0(pRigidBody,float,getMaxAngularSpeed)
+		DECLAREMETHODC_0(pRigidBody,VxVector,getLinearVelocity)
+		DECLAREMETHODC_0(pRigidBody,VxVector,getAngularVelocity)
 		
 		/************************************************************************/
 		/* Mass                                                                     */
@@ -832,7 +855,7 @@ void PhysicManager::_RegisterVSL()
 		DECLAREMETHOD_2_WITH_DEF_VALS(pRigidBody,void,setBoxDimensions,const VxVector&,NODEFAULT,CKBeObject*,NULL)
 
 
-		DECLAREMETHOD_0(pRigidBody,pWorld*,getWorld)
+		DECLAREMETHODC_0(pRigidBody,pWorld*,getWorld)
 		DECLAREMETHOD_1(pRigidBody,pJoint*,isConnected,CK3dEntity*)
 		DECLAREMETHOD_2(pRigidBody,pJoint*,isConnected,CK3dEntity*,int)
 		//DECLAREMETHOD_2_WITH_DEF_VALS(pRigidBody,void,setBoxDimensions,const VxVector&,NODEFAULT,CKBeObject*,NULL)
@@ -842,29 +865,29 @@ void PhysicManager::_RegisterVSL()
 		DECLAREMETHOD_2(pRigidBody,void,setGroupsMask,CK3dEntity*,const pGroupsMask&)
 
 		DECLAREMETHOD_0(pRigidBody,int,getFlags)
-		DECLAREMETHOD_1(pRigidBody,VxVector,getPointVelocity,const VxVector&)
-		DECLAREMETHOD_1(pRigidBody,VxVector,getLocalPointVelocity,const VxVector&)
+		DECLAREMETHODC_1(pRigidBody,VxVector,getPointVelocity,const VxVector&)
+		DECLAREMETHODC_1(pRigidBody,VxVector,getLocalPointVelocity,const VxVector&)
 
 		
-		DECLAREMETHOD_0(pRigidBody,bool,isCollisionEnabled)
+		DECLAREMETHOD_1_WITH_DEF_VALS(pRigidBody,bool,isCollisionEnabled,CK3dEntity*,NULL)
 
-		DECLAREMETHOD_1(pRigidBody,void,setKinematic,int)
-		DECLAREMETHOD_0(pRigidBody,int,isKinematic)
+		DECLAREMETHOD_1(pRigidBody,void,setKinematic,bool)
+		DECLAREMETHODC_0(pRigidBody,bool,isKinematic)
 
-		DECLAREMETHOD_1(pRigidBody,void,enableGravity,int)
-		DECLAREMETHOD_0(pRigidBody,bool,isAffectedByGravity)
+		DECLAREMETHOD_1(pRigidBody,void,enableGravity,bool)
+		DECLAREMETHODC_0(pRigidBody,bool,isAffectedByGravity)
 
-		DECLAREMETHOD_1(pRigidBody,void,setSleeping,int)
-		DECLAREMETHOD_0(pRigidBody,int,isSleeping)
+		DECLAREMETHOD_1(pRigidBody,void,setSleeping,bool)
+		DECLAREMETHODC_0(pRigidBody,bool,isSleeping)
 		DECLAREMETHOD_1(pRigidBody,void,setLinearDamping,float)
 		DECLAREMETHOD_1(pRigidBody,void,setAngularDamping,float)
-		DECLAREMETHOD_1(pRigidBody,void,lockTransformation,BodyLockFlags)
+		DECLAREMETHOD_1(pRigidBody,void,lockTransformation,int)
 		DECLAREMETHOD_1(pRigidBody,int,isBodyFlagOn,int)
 		
 		DECLAREMETHOD_1_WITH_DEF_VALS(pRigidBody,void,wakeUp,float,NX_SLEEP_INTERVAL)
 		DECLAREMETHOD_1(pRigidBody,void,setSleepEnergyThreshold,float)
 		DECLAREMETHOD_1(pRigidBody,void,setSolverIterationCount,int)
-		DECLAREMETHOD_5_WITH_DEF_VALS(pRigidBody,bool,onSubShapeTransformation,bool,TRUE,bool,TRUE,bool,TRUE,CK3dEntity*,NULL,bool,true)
+		DECLAREMETHOD_5_WITH_DEF_VALS(pRigidBody,bool,onSubShapeTransformation,bool,true,bool,true,bool,true,CK3dEntity*,NULL,bool,true)
 
 
 		DECLAREMETHOD_2_WITH_DEF_VALS(pRigidBody,void,setCollisionsGroup,int,NODEFAULT,CK3dEntity*,)
@@ -880,9 +903,9 @@ void PhysicManager::_RegisterVSL()
 
 
 
-		DECLAREMETHOD_0(pRigidBody,int,getCollisionsGroup)
+		DECLAREMETHOD_1_WITH_DEF_VALS(pRigidBody,int,getCollisionsGroup,CK3dEntity*,NULL)
 		DECLAREMETHOD_2(pRigidBody,int,updateMassFromShapes,float,float)
-		DECLAREMETHOD_5_WITH_DEF_VALS(pRigidBody,int,addSubShape,CKMesh*,NULL,pObjectDescr,NODEFAULT,CK3dEntity*,NULL,VxVector,VxVector(),VxQuaternion,VxQuaternion())
+		DECLAREMETHOD_5_WITH_DEF_VALS(pRigidBody,int,addSubShape,CKMesh*,NODEFAULT,pObjectDescr&,NODEFAULT,CK3dEntity*,NULL,VxVector,VxVector(),VxQuaternion,VxQuaternion())
 		DECLAREMETHOD_3_WITH_DEF_VALS(pRigidBody,int,removeSubShape,CKMesh*,NODEFAULT,float,0.0,float,0.0)
 
 

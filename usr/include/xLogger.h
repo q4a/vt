@@ -12,7 +12,7 @@
 //#include <LogTools.h>
 #include <xBitSet.h>
 //#include <base.h>
-#include <TypeInfo.h>
+#include <typeinfo>
 
 #include <BaseMacros.h>
 
@@ -44,7 +44,7 @@
 #endif
 
 #ifndef this
-	#define  XL_OBJECT_PREFIX(T) "FN:"##T
+	#define  XL_OBJECT_PREFIX(T) "FN:" T
 #else
 	#define  XL_OBJECT_PREFIX(T) "Call in Class:"##T
 #endif
